@@ -1,13 +1,54 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { createStore } from "redux";
+import allReducers from "./reducers";
+import { Provider } from "react-redux";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// //store - stores all the data required for the application globally
+
+// //action - describes what we need to do with the data. eg - increment, decrement
+
+// const increment = () => {
+//   return { type: "INCREMENT" };
+// };
+
+// const decrement = () => {
+//   return { type: "DECREMENT" };
+// };
+
+// //reducer - checks the action and manipulate the data in the store
+
+// const counter = (state = 0, action) => {
+//   switch(action.type) {
+//     case "INCREMENT":
+//       return state + 1
+//     case "DECREMENT":
+//       return state - 1
+//   }
+// }
+
+let store = createStore(
+  allReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+// //display
+// store.subscribe(() => console.log(store.getState()))
+
+// //dispatch - dispatch and action to the reducer
+// store.dispatch(increment())
+// store.dispatch(decrement())
+// store.dispatch(decrement())
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
